@@ -4,7 +4,7 @@ import Reveal from "../components/Reveal";
 export default function PMOCSection() {
   return (
     <Reveal>
-    <section className="mx-auto max-w-6xl px-4 py-12">
+    <section className="mx-auto max-w-6xl px-4 sm:px-6 py-12">
       <div className="rounded-3xl border border-white/10 bg-gradient-to-b from-white/10 to-white/5 p-6 sm:p-10">
         <h2 className="text-2xl font-bold text-white">PMOC</h2>
         <p className="mt-2 text-zinc-300">

@@ -3,3 +3,45 @@
 @tailwind utilities;
 
 :root { color-scheme: dark; }
+
+/* Floating metric (igual do portfólio do teu amigo) */
+.floating-metric {
+  text-align: right;
+  animation: float 6s ease-in-out infinite;
+}
+
+.metric-number {
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-weight: 900;
+  color: white;
+  line-height: 1;
+  text-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.6),
+    0 0 60px rgba(255, 255, 255, 0.08);
+}
+
+.metric-label {
+  margin-top: 8px;
+  font-size: 1.15rem;
+  color: #e5e5e5;
+}
+
+.metric-detail {
+  margin-top: 6px;
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #a3a3a3;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-28px); }
+  100% { transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .floating-metric {
+    text-align: center;
+  }
+}

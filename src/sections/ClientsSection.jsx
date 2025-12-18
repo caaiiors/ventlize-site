@@ -13,7 +13,7 @@ export default function ClientsSection({ variant = "dark" }) {
   );
 
   return (
-    <section className="mx-auto max-w-6xl px-4 py-12">
+    <section className="mx-auto max-w-6xl px-4 sm:px-6 py-12">
       <h2 className={title}>Clientes atendidos</h2>
       <p className={sub}>Alguns negócios que já receberam nossos serviços.</p>
 

@@ -18,7 +18,7 @@ export default function ContactCTA({ variant = "dark" }) {
   const link = cn("hover:underline", isLight ? "text-zinc-900" : "text-white");
 
   return (
-    <section className="mx-auto max-w-6xl px-4 py-12">
+    <section className="mx-auto max-w-6xl px-4 sm:px-6 py-12">
       <motion.div
         className={wrapper}
         initial={{ opacity: 0, y: 14 }}
@@ -36,7 +36,7 @@ export default function ContactCTA({ variant = "dark" }) {
             </div>
             <div>
               <span className={metaLabel}>E-mail:</span>{" "}
-              <a className={link} href={`mailto:${CONTACT.email}`}>
+              <a className={link} href={`https://mail.google.com/mail/?view=cm&fs=1&to=ventlize@outlook.com`}>
                 {CONTACT.email}
               </a>
             </div>

@@ -53,6 +53,5 @@ export const CLIENTS = [
   "Facere Odontologia Especializada",
   "Bellamesa Produtos Alimentícios",
   "HFIX Construção e Reforma",
-  "Bertani",
-  "Fiducia Assessoria",
+  "Bertani Fiducia Assessoria",
 ];

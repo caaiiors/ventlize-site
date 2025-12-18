@@ -9,7 +9,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-zinc-950/80 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 sm:px-6 py-3">
         <Link to="/" className="flex items-center gap-2">
           <div className="h-9 w-9 rounded-xl bg-zinc-800 ring-1 ring-white/10" />
           <div className="leading-tight">
@@ -35,7 +35,7 @@ export default function Navbar() {
           href={`https://wa.me/${CONTACT.phoneDigits}`}
           target="_blank"
           rel="noreferrer"
-          className="rounded-xl bg-orange-500 px-4 py-2 text-sm font-semibold text-zinc-950 hover:bg-orange-400 transition"
+          className="rounded-xl bg-orange-500 px-4 sm:px-6 py-2 text-sm font-semibold text-zinc-950 hover:bg-orange-400 transition"
         >
           Chamar no WhatsApp
         </a>

@@ -2,7 +2,7 @@ import { PORTFOLIO_PLACEHOLDERS } from "../data/content";
 
 export default function PortfolioGrid() {
   return (
-    <section className="mx-auto max-w-6xl px-4 py-12">
+    <section className="mx-auto max-w-6xl px-4 sm:px-6 py-12">
       <h2 className="text-2xl font-bold text-white">Portfólio</h2>
       <p className="mt-2 text-zinc-300">
         Em breve: fotos reais dos serviços (antes/depois) e cases completos.
