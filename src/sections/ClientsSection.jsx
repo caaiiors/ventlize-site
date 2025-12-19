@@ -1,29 +1,55 @@
+import { useState } from "react";
 import { CLIENTS } from "../data/content";
-import { cn } from "../lib/cn";
+import ImageModal from "../components/ImageModal";
+import Reveal from "../components/Reveal";
 
 export default function ClientsSection({ variant = "dark" }) {
+  const [selected, setSelected] = useState(null);
   const isLight = variant === "light";
 
-  const title = cn("text-2xl font-bold", isLight ? "text-zinc-900" : "text-white");
-  const sub = cn("mt-2", isLight ? "text-zinc-700" : "text-zinc-300");
+  const titleClass = isLight ? "text-zinc-900" : "text-white";
+  const subClass = isLight ? "text-zinc-700" : "text-zinc-300";
 
-  const chip = cn(
-    "rounded-full border px-4 py-2 text-sm",
-    isLight ? "border-zinc-200 bg-zinc-50 text-zinc-800" : "border-white/10 bg-white/5 text-zinc-200"
-  );
+  const cardClass = isLight
+    ? "border-zinc-200 bg-white text-zinc-900"
+    : "border-white/10 bg-white/5 text-zinc-200";
 
   return (
+    <Reveal>
     <section className="mx-auto max-w-6xl px-4 sm:px-6 py-12">
-      <h2 className={title}>Clientes atendidos</h2>
-      <p className={sub}>Alguns negócios que já receberam nossos serviços.</p>
+      <h2 className={`text-2xl font-bold ${titleClass}`}>Clientes atendidos</h2>
+      <p className={`mt-2 ${subClass}`}>Alguns negócios que já receberam nossos serviços.</p>
 
-      <div className="mt-6 flex flex-wrap gap-2">
+ <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
         {CLIENTS.map((c) => (
-          <span key={c} className={chip}>
-            {c}
-          </span>
+          <button
+            key={c.name}
+            type="button"
+            onClick={() => setSelected(c)}
+            className={`rounded-2xl border p-4 flex flex-col items-center justify-center gap-3 text-left transition hover:-translate-y-0.5 hover:bg-white/10 ${cardClass}`}
+          >
+            <div className="h-10 w-10 rounded-xl bg-zinc-900/10 grid place-items-center overflow-hidden">
+              {c.logo ? (
+                <img src={c.logo} alt={`${c.name} logo`} className="h-10 w-10 object-contain" loading="lazy" />
+              ) : (
+                <span className="text-xs text-zinc-500">Logo</span>
+              )}
+            </div>
+
+            <div className="text-center text-sm font-medium leading-snug">
+              {c.name}
+            </div>
+          </button>
         ))}
       </div>
+
+      <ImageModal
+        open={!!selected}
+        title={selected?.name}
+        src={selected?.photo}
+        onClose={() => setSelected(null)}
+      />
     </section>
+    </Reveal>
   );
 }

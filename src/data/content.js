@@ -49,9 +49,9 @@ export const PMOC_INFO = [
 ];
 
 export const CLIENTS = [
-  "Inácio Espetinho 2002",
-  "Facere Odontologia Especializada",
-  "Bellamesa Produtos Alimentícios",
-  "HFIX Construção e Reforma",
-  "Bertani Fiducia Assessoria",
+  { name: "Inácio Espetinho 2002", logo: "/logos/inacio.png", photo: "/logos/clients/inacio.png" },
+  { name: "Facere Odontologia Especializada", logo: "/logos/facere.png", photo: "/logos/clients/facere.png" },
+  { name: "Bellamesa Produtos Alimentícios", logo: "/logos/bellamesa.png", photo: "/logos/clients/bellamesa.png" },
+  { name: "HFIX Construção e Reforma", logo: "/logos/hfix.png", photo: "/logos/clients/hfix.png" },
+  { name: "Bertani Fiducia Assessoria", logo: "/logos/bertani.png", photo: "/logos/clients/bertani.png" },
 ];

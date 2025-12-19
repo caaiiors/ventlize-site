@@ -7,7 +7,7 @@ import Reveal from "../components/Reveal";
 export default function PortfolioPage() {
   return (
     <Reveal>
-    <div className="min-h-screen bg-zinc-950">
+    <div className="min-h-screen bg-zinc-950 overflow-x-hidden">
       <Navbar />
       <main>
         <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10">

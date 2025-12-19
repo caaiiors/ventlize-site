@@ -30,7 +30,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-[radial-gradient(700px_circle_at_20%_0%,rgba(249,115,22,0.18),transparent_55%)]" />
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6 pt-16 pb-10 sm:pt-20 sm:pb-14 relative">
-        <div className="min-h-[70vh] sm:min-h-[78vh] flex flex-col md:flex-row items-center justify-between gap-10">
+        <div className="flex flex-col md:flex-row items-center justify-center md:justify-between gap-8 py-8 sm:py-10 min-h-[52vh] sm:min-h-[70vh]">
           {/* Left */}
           <motion.div
             className="w-full md:w-1/2"

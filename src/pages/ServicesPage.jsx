@@ -10,7 +10,7 @@ import ClientsSection from "../sections/ClientsSection";
 export default function ServicesPage() {
   return (
 
-    <div className="min-h-screen bg-zinc-950">
+    <div className="min-h-screen bg-zinc-950 overflow-x-hidden">
       <Navbar />
       <main>
         <Hero />
