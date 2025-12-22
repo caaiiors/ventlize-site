@@ -38,6 +38,13 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
           >
+            <div className="mt-4 mb-2 block sm:hidden">
+              <img
+                src="/public/SEM_FUNDO_LOGO_SEMLARANJA.png"
+                alt="Ventlize Logo"
+                className="w-24 h-auto"
+              ></img>
+            </div>
             <p className="text-xs tracking-widest text-zinc-400">
               SOLUÇÕES TÉRMICAS INTELIGENTES
             </p>

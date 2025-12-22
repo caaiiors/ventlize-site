@@ -24,10 +24,10 @@ export const DIFFERENTIALS = [
 ];
 
 export const PORTFOLIO_PLACEHOLDERS = [
-  { title: "Instalação residencial", desc: "Execução limpa, alinhada e com acabamento profissional." },
-  { title: "Manutenção preventiva", desc: "Rotina de verificação e melhoria de performance." },
-  { title: "Higienização completa", desc: "Procedimento técnico para qualidade do ar interior." },
-  { title: "Atendimento corporativo", desc: "Suporte para ambientes comerciais e contratos." },
+  { title: "Instalação residencial", desc: "Execução limpa, alinhada e com acabamento profissional.", image: "public/clientes/residencial.HEIC" },
+  { title: "Manutenção preventiva", desc: "Rotina de verificação e melhoria de performance.", image: "" },
+  { title: "Higienização completa", desc: "Procedimento técnico para qualidade do ar interior.", image: "" },
+  { title: "Atendimento corporativo", desc: "Suporte para ambientes comerciais e contratos.", image: "" },
 ];
 
 export const ABOUT = {
@@ -54,4 +54,5 @@ export const CLIENTS = [
   { name: "Bellamesa Produtos Alimentícios", logo: "/logos/bellamesa.png", photo: "/logos/clients/bellamesa.png" },
   { name: "HFIX Construção e Reforma", logo: "/logos/hfix.png", photo: "/logos/clients/hfix.png" },
   { name: "Bertani Fiducia Assessoria", logo: "/logos/bertani.png", photo: "/logos/clients/bertani.png" },
+  { name: "Lapacor", logo: "/logos/lapacor1.jpg", photo: "/logos/clients/lapacor1.jpg" },
 ];
