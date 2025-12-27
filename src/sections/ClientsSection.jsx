@@ -1,60 +1,94 @@
-import { useState } from "react";
-import { CLIENTS } from "../data/content";
+import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import ImageModal from "../components/ImageModal";
-import Reveal from "../components/Reveal";
+import { db } from "../services/firebase"; 
+import { collection, getDocs } from "firebase/firestore";
 
-export default function ClientsSection({ variant = "dark" }) {
+export default function ClientsSection() {
   const [selected, setSelected] = useState(null);
-  const isLight = variant === "light";
+  const [clients, setClients] = useState([]);
 
-  const titleClass = isLight ? "text-zinc-900" : "text-white";
-  const subClass = isLight ? "text-zinc-700" : "text-zinc-300";
-
-  const cardClass = isLight
-    ? "border-zinc-200 bg-white text-zinc-900"
-    : "border-white/10 bg-white/5 text-zinc-200";
+  useEffect(() => {
+    const fetchClients = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "clients"));
+        const clientsData = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setClients(clientsData);
+      } catch (error) {
+        console.error("Erro ao buscar clientes:", error);
+      }
+    };
+    fetchClients();
+  }, []);
 
   return (
-    <Reveal>
-    <section className="mx-auto max-w-6xl px-4 sm:px-6 py-12">
-      <h2 className={`text-2xl font-bold ${titleClass}`}>Clientes atendidos</h2>
-      <p className={`mt-2 ${subClass}`}>Alguns negócios que já receberam nossos serviços.</p>
-
- <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-        {CLIENTS.map((c) => (
-          <button
-            key={c.name}
-            type="button"
-            onClick={() => setSelected(c)}
-            className={`rounded-2xl border p-4 flex flex-col items-center justify-center gap-3 text-left transition hover:-translate-y-0.5 hover:bg-white/10 ${cardClass}`}
-          >
-            <div className="h-10 w-10 rounded-xl bg-zinc-900/10 grid place-items-center overflow-hidden">
-              {c.logo ? (
-                <img src={c.logo} alt={`${c.name} logo`} className="h-10 w-10 object-contain" loading="lazy" />
-              ) : (
-                <span className="text-xs text-zinc-500">Logo</span>
-              )}
-            </div>
-
-            <div className="text-center text-base sm:text-lg font-normal leading-snug">
-              {c.name}
-            </div>
-          </button>
-        ))}
+    <section className="py-20 bg-transparent overflow-hidden select-none">
+      <div className="container mx-auto px-4 mb-12 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 font-poppins">
+          Clientes atendidos
+        </h2>
+        <p className="text-white/60 max-w-2xl mx-auto">
+          Alguns negócios que já receberam nossos serviços.
+        </p>
       </div>
 
-<ImageModal
-  open={!!selected}
-  onClose={() => setSelected(null)}
-  title={selected?.name}
-  items={selected?.media || []}     // <- passa o array
-  initialIndex={0}
-  videos={(selected?.media || []).filter((url) =>
-    url.includes("youtube.com/embed")
-  )}
-/>
+      {/* Carrossel com Drag */}
+      <div className="relative w-full overflow-hidden px-4">
+        <motion.div
+          className="flex gap-4 justify-center"
+          drag="x"
+          dragElastic={0.15}
+          dragConstraints={{
+            left: -(clients.length * 220 - 890),
+            right: 0,
+          }}
+          dragMomentum={{
+            power: 0.8,
+            restDelta: 10,
+          }}
+        >
+          {clients.map((client) => (
+            <motion.div
+              key={client.id}
+              className="w-[200px] flex-shrink-0 group relative flex flex-col items-center justify-center cursor-pointer"
+              onClick={() => setSelected(client)}
+              whileHover={{ y: -5 }}
+              transition={{ duration: 0.2 }}
+            >
+              {/* Logo container */}
+              <div className="h-24 md:h-32 w-full flex items-center justify-center grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300">
+                <img
+                  src={client.logo}
+                  alt={client.name}
+                  className="max-h-full max-w-full object-contain"
+                  loading="lazy"
+                  draggable="false"
+                />
+              </div>
 
+              {/* Nome do cliente */}
+              <p className="mt-4 text-sm font-medium text-white/0 group-hover:text-white/100 transition-all duration-300 text-center">
+                {client.name}
+              </p>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* Modal de Detalhes */}
+      <ImageModal
+        open={!!selected}
+        onClose={() => setSelected(null)}
+        title={selected?.name}
+        items={selected?.media || []} 
+        initialIndex={0}
+        videos={(selected?.media || []).filter((url) =>
+          url && url.includes("youtube.com/embed")
+        )}
+      />
     </section>
-    </Reveal>
   );
 }

@@ -10,11 +10,9 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-zinc-950/80 backdrop-blur">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 py-3">
-        {/* Linha 1 (mobile) / Linha única (desktop) */}
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center justify-between gap-4">
             <Link to="/" className="flex items-center gap-2">
-              {/* LOGO AQUI */}
               <div className="h-9 w-9 rounded-xl bg-zinc-800 ring-1 ring-white/10 overflow-hidden">
                 <img
                   src="/ventlizelogo.png"
@@ -30,7 +28,6 @@ export default function Navbar() {
               </div>
             </Link>
 
-            {/* Botão no mobile (fica à direita) */}
             <a
               href={`https://wa.me/${CONTACT.phoneDigits}`}
               target="_blank"
@@ -40,26 +37,22 @@ export default function Navbar() {
               WhatsApp
             </a>
           </div>
-
-          {/* Menu: aparece abaixo no mobile / no meio no desktop */}
-          <nav className="flex items-center gap-4 overflow-x-auto whitespace-nowrap sm:overflow-visible">
-            <NavLink to="/" className={linkClass}>
-              Serviços
-            </NavLink>
-            <NavLink to="/portfolio" className={linkClass}>
-              Portfólio
-            </NavLink>
+        <nav className="grid grid-cols-3 gap-1 sm:flex sm:flex-row sm:gap-5 sm:items-center w-full sm:w-auto">
+          <NavLink to="/" className={linkClass + " text-center text-sm"}>
+            Serviços
+          </NavLink>
+          <NavLink to="/portfolio" className={linkClass + " text-center text-sm"}>
+            Portfólio
+          </NavLink>
             <a
               href={CONTACT.instagramUrl}
               target="_blank"
               rel="noreferrer"
-              className="text-sm font-medium text-zinc-200 hover:text-white"
+              className={linkClass({ isActive: false }) + " text-center"}
             >
               Instagram
             </a>
-          </nav>
-
-          {/* Botão no desktop */}
+        </nav>
           <a
             href={`https://wa.me/${CONTACT.phoneDigits}`}
             target="_blank"

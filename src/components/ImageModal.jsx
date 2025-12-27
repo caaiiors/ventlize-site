@@ -6,13 +6,12 @@ export default function ImageModal({
   onClose,
   title,
   description,
-  items = [],       // array de URLs (imagens + vídeos)
+  items = [],
   initialIndex = 0,
-  videos = [],      // array com URLs que são vídeos (YouTube embed)
+  videos = [],
 }) {
   const [index, setIndex] = useState(initialIndex);
 
-  // sempre que abrir com outro card, sincroniza o índice
   useEffect(() => {
     if (open) setIndex(initialIndex);
   }, [open, initialIndex]);
@@ -25,7 +24,7 @@ export default function ImageModal({
     }
     if (open) window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  });
+  }, [open, onClose]);
 
   const hasItems = items.length > 0;
   const current = hasItems ? items[index] : null;
@@ -110,7 +109,7 @@ export default function ImageModal({
                     />
                   )}
 
-                  {/* seta esquerda */}
+                  {/* setas */}
                   {items.length > 1 && (
                     <>
                       <button
@@ -121,8 +120,6 @@ export default function ImageModal({
                       >
                         ‹
                       </button>
-
-                      {/* seta direita */}
                       <button
                         type="button"
                         onClick={handleNext}
