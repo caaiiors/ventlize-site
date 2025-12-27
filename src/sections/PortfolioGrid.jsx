@@ -76,7 +76,7 @@ function PortfolioCard({ item, onOpen }) {
   }, [media.length]);
 
   const currentSrc = media[currentIndex];
-  const isVideo = item.videos && item.videos.includes(currentSrc);
+  const isVideo = currentSrc && (item.videos || []).includes(currentSrc);
 
   return (
     <button
@@ -99,7 +99,10 @@ function PortfolioCard({ item, onOpen }) {
                 src={currentSrc}
                 alt={item.title}
                 className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]"
-                loading="lazy"
+                loading="eager"
+                onError={(e) => {
+                  console.error("Erro ao carregar imagem:", currentSrc);
+                }}
               />
             )}
           </>
@@ -128,3 +131,4 @@ function PortfolioCard({ item, onOpen }) {
     </button>
   );
 }
+
