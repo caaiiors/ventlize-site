@@ -38,20 +38,21 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
           >
-            <div className="mt-4 mb-2 block sm:hidden">
-              <img
-                src="/public/SEM_FUNDO_LOGO_SEMLARANJA.png"
-                alt="Ventlize Logo"
-                className="w-24 h-auto"
-              ></img>
+
+
+            <div className="">
+              <div className="flex justify-start mb-4">
+                <img
+                  src="/ventlize_semfundo.png"
+                  alt="Ventlize Ar-condicionado"
+                  className="h-14 w-auto object-contain"
+                  loading="eager"
+                />
+              </div>
             </div>
             <p className="text-xs tracking-widest text-zinc-400">
               SOLUÇÕES TÉRMICAS INTELIGENTES
             </p>
-
-            <h1 className="mt-3 font-bold text-white leading-[1.05] text-[clamp(30px,7vw,56px)]">
-              Ventlize Ar-condicionado
-            </h1>
 
             <p className="mt-4 max-w-xl text-zinc-300">
               Instalação, manutenção, higienização e PMOC com foco em segurança,

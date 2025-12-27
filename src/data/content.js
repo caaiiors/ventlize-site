@@ -24,10 +24,48 @@ export const DIFFERENTIALS = [
 ];
 
 export const PORTFOLIO_PLACEHOLDERS = [
-  { title: "Instalação residencial", desc: "Execução limpa, alinhada e com acabamento profissional.", image: "public/clientes/residencial.HEIC" },
-  { title: "Manutenção preventiva", desc: "Rotina de verificação e melhoria de performance.", image: "" },
-  { title: "Higienização completa", desc: "Procedimento técnico para qualidade do ar interior.", image: "" },
-  { title: "Atendimento corporativo", desc: "Suporte para ambientes comerciais e contratos.", image: "" },
+  { title: "Instalações residenciais", desc: "Execução limpa, alinhada e com acabamento profissional.", images: [
+    "/portfolio/residencial/capa.jpeg",
+    "/portfolio/residencial/IMG_3948.jpeg",
+    "/portfolio/residencial/IMG_3964.jpeg",
+    "/portfolio/residencial/IMG_3986.jpeg",
+    "/portfolio/residencial/IMG_5368.jpeg",
+    "/portfolio/residencial/OBRA.jpeg",
+    "/portfolio/residencial/INFRAESTRUTURA.jpg",
+    "/portfolio/residencial/PASTA.jpeg",
+  ], 
+    videos: [
+    ]
+},
+  { title: "Manutenções preventivas", desc: "Rotina de verificação e melhoria de performance.", images: [
+    "/portfolio/preventiva/capa.jpeg",
+    "/portfolio/preventiva/capa2.jpeg",
+    "/portfolio/preventiva/manutencaoprev2.jpeg",
+    "/portfolio/preventiva/antes.PNG",
+    "/portfolio/preventiva/dps.PNG",
+    "/portfolio/preventiva/montedear.jpg",
+  ], 
+    videos: [
+    ] },
+  { title: "Manutenções corretivas", desc: "Identificamos a falha, corrigimos a causa e restauramos o desempenho do seu sistema.", images: [
+    "/portfolio/corretiva/corretivacapa.jpeg",
+    "/portfolio/corretiva/corretiva2.jpeg",
+    "/portfolio/corretiva/manutencaoind.jpg",
+    "/portfolio/corretiva/manutencaoind2.jpg",
+  ], 
+    videos: [
+        ] },
+  { title: "Higienizações completas", desc: "Procedimento técnico para qualidade do ar interior.", images: [
+    "/portfolio/higienizacao/antes.jpeg",
+    "/portfolio/higienizacao/dps.jpeg",
+  ], 
+    videos: [
+    ] },
+  { title: "Vendas de equipamentos", desc: "Equipamentos originais, alta eficiência energética e suporte técnico especializado em todas as etapas.", images: [
+    "/portfolio/vendaequipamentos/venda.jpeg",
+  ], 
+    videos: [
+    ] },
 ];
 
 export const ABOUT = {
@@ -49,10 +87,51 @@ export const PMOC_INFO = [
 ];
 
 export const CLIENTS = [
-  { name: "Inácio Espetinho 2002", logo: "/logos/inacio.png", photo: "/logos/clients/inacio.png" },
-  { name: "Facere Odontologia Especializada", logo: "/logos/facere.png", photo: "/logos/clients/facere.png" },
-  { name: "Bellamesa Produtos Alimentícios", logo: "/logos/bellamesa.png", photo: "/logos/clients/bellamesa.png" },
-  { name: "HFIX Construção e Reforma", logo: "/logos/hfix.png", photo: "/logos/clients/hfix.png" },
-  { name: "Bertani Fiducia Assessoria", logo: "/logos/bertani.png", photo: "/logos/clients/bertani.png" },
-  { name: "Lapacor", logo: "/logos/lapacor1.jpg", photo: "/logos/clients/lapacor1.jpg" },
+  {
+    name: "Inácio Espetinho 2002",
+    logo: "/logos/inacio.png",
+    media: [
+      "/clientes/inacio/IMG_3595.jpeg",
+      "/clientes/inacio/IMG_3598.jpeg",
+    ],
+  },
+  {
+    name: "Facere Odontologia Especializada",
+    logo: "/logos/facere.png",
+    media: [
+      "/logos/clients/facere.png"
+    ],
+  },
+  {
+    name: "Bellamesa Produtos Alimentícios",
+    logo: "/logos/bellamesa.png",
+    media: [
+      "/logos/clients/bellamesa.png"
+    ],
+  },
+  {
+    name: "HFIX Construção e Reforma",
+    logo: "/logos/hfix.png",
+    media: [
+      "/logos/clients/hfix.png"
+    ],
+  },
+  {
+    name: "Bertani Fiducia Assessoria",
+    logo: "/logos/bertani.png",
+    media: [
+      "/clientes/bertani/1.jpg",
+      "/clientes/bertani/2.jpg",
+      "/clientes/bertani/3.jpeg",
+      "/clientes/bertani/4.jpeg",
+      "/clientes/bertani/5.jpeg",
+    ],
+  },
+  {
+    name: "Lapacor",
+    logo: "/logos/lapacor1.jpg",
+    media: [
+      "/logos/clients/lapacor1.jpg"
+    ],
+  },
 ];

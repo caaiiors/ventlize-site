@@ -36,19 +36,24 @@ export default function ClientsSection({ variant = "dark" }) {
               )}
             </div>
 
-            <div className="text-center text-sm font-medium leading-snug">
+            <div className="text-center text-base sm:text-lg font-normal leading-snug">
               {c.name}
             </div>
           </button>
         ))}
       </div>
 
-      <ImageModal
-        open={!!selected}
-        title={selected?.name}
-        src={selected?.photo}
-        onClose={() => setSelected(null)}
-      />
+<ImageModal
+  open={!!selected}
+  onClose={() => setSelected(null)}
+  title={selected?.name}
+  items={selected?.media || []}     // <- passa o array
+  initialIndex={0}
+  videos={(selected?.media || []).filter((url) =>
+    url.includes("youtube.com/embed")
+  )}
+/>
+
     </section>
     </Reveal>
   );

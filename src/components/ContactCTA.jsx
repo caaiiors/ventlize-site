@@ -27,8 +27,8 @@ export default function ContactCTA({ variant = "dark" }) {
         transition={{ duration: 0.55, ease: "easeOut" }}
       >
         <div>
-          <h3 className={title}>Fale com a Ventlize</h3>
-          <p className={sub}>Orçamentos e atendimentos via WhatsApp, e-mail e Instagram.</p>
+          <h3 className={title}>Fale conosco</h3>
+          <p className={sub}>Orçamentos e atendimentos via WhatsApp e Instagram.</p>
 
           <div className={meta}>
             <div>
