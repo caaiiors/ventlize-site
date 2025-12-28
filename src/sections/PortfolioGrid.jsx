@@ -66,7 +66,7 @@ function PortfolioCard({ item, onOpen }) {
     if (media.length <= 1) return;
     const id = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % media.length);
-    }, 3000);
+    }, 6000);
     return () => clearInterval(id);
   }, [media.length]);
 
