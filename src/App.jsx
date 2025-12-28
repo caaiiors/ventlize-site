@@ -1,7 +1,13 @@
 // src/App.jsx
 import { RouterProvider } from "react-router-dom";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import { router } from "./app/routes";
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />
+      <SpeedInsights />
+    </>
+  );
 }
