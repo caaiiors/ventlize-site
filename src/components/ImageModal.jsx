@@ -16,15 +16,17 @@ export default function ImageModal({
     if (open) setIndex(initialIndex);
   }, [open, initialIndex]);
 
+  // Navegação por teclado
   useEffect(() => {
     function onKeyDown(e) {
       if (e.key === "Escape") onClose?.();
       if (e.key === "ArrowRight") handleNext();
       if (e.key === "ArrowLeft") handlePrev();
     }
+
     if (open) window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [open, onClose]);
+  }, [open, onClose, index, items.length]); // Adicionei dependências para garantir estado atualizado
 
   const hasItems = items.length > 0;
   const current = hasItems ? items[index] : null;
@@ -40,111 +42,165 @@ export default function ImageModal({
     setIndex((prev) => (prev - 1 + items.length) % items.length);
   };
 
+  // Lógica do Swipe (Arrastar)
+  const handleDragEnd = (event, info) => {
+    const swipeThreshold = 50; // Pixels necessários para considerar um swipe
+    if (info.offset.x < -swipeThreshold) {
+      handleNext();
+    } else if (info.offset.x > swipeThreshold) {
+      handlePrev();
+    }
+  };
+
   return (
     <AnimatePresence>
       {open ? (
         <motion.div
-          className="fixed inset-0 z-[60] flex items-center justify-center p-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
+          onClick={onClose}
         >
-          {/* overlay */}
-          <motion.button
-            type="button"
-            className="absolute inset-0 bg-black/70"
+          {/* Botão Fechar */}
+          <button
             onClick={onClose}
-            aria-label="Fechar"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          />
-
-          {/* dialog */}
-          <motion.div
-            role="dialog"
-            aria-modal="true"
-            aria-label={title}
-            className="relative w-full max-w-3xl overflow-hidden rounded-3xl border border-white/10 bg-zinc-950 shadow-2xl"
-            initial={{ scale: 0.96, y: 12, opacity: 0 }}
-            animate={{ scale: 1, y: 0, opacity: 1 }}
-            exit={{ scale: 0.98, y: 10, opacity: 0 }}
-            transition={{ duration: 0.18, ease: "easeOut" }}
+            className="absolute top-4 right-4 z-50 p-2 text-white/70 hover:text-white transition-colors"
           >
-            {/* header */}
-            <div className="flex items-center justify-between gap-4 border-b border-white/10 px-4 py-3">
-              <div className="text-sm font-semibold text-white truncate">
-                {title}
-              </div>
-              <button
-                type="button"
-                onClick={onClose}
-                className="rounded-xl px-3 py-2 text-sm font-semibold text-zinc-200 hover:bg-white/10"
-              >
-                Fechar
-              </button>
-            </div>
+            <svg
+              className="w-8 h-8"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
 
-            {/* conteúdo + setas */}
-            <div className="relative bg-black">
+          {/* Header Mobile */}
+          <div className="absolute top-0 left-0 right-0 p-4 bg-gradient-to-b from-black/80 to-transparent z-40 pointer-events-none">
+            <h3 className="text-white font-medium text-lg text-center pointer-events-auto">
+              {title}
+            </h3>
+          </div>
+
+          {/* Área Principal */}
+          <div 
+            className="relative w-full h-full flex items-center justify-center overflow-hidden"
+            onClick={(e) => e.stopPropagation()} // Evita fechar ao clicar na área da imagem
+          >
+            <AnimatePresence initial={false} mode="wait">
               {current && (
-                <>
+                <motion.div
+                  key={index} // Essencial para o Framer Motion saber que o item mudou
+                  
+                  // Propriedades de Arrastar (Swipe)
+                  drag="x"
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={1}
+                  onDragEnd={handleDragEnd}
+                  
+                  // Animação de entrada/saída
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -50 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  
+                  className="absolute w-full h-full flex items-center justify-center p-4 cursor-grab active:cursor-grabbing"
+                >
                   {isVideo ? (
-                    <div className="relative w-full pt-[56.25%]">
-                      <iframe
+                    <div className="relative w-full max-w-5xl aspect-video rounded-lg overflow-hidden bg-black shadow-2xl">
+                        {/* Overlay transparente para permitir o drag sobre o iframe */}
+                        <div className="absolute inset-0 z-10 bg-transparent" /> 
+                        <iframe
                         src={current}
-                        title={title}
-                        className="absolute inset-0 h-full w-full"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        className="w-full h-full"
+                        allow="autoplay; encrypted-media"
                         allowFullScreen
-                      />
+                        />
                     </div>
                   ) : (
                     <img
                       src={current}
                       alt={title}
-                      className="w-full max-h-[80vh] object-contain"
-                      loading="eager"
+                      className="max-h-[85vh] max-w-full object-contain rounded-lg shadow-2xl select-none"
+                      draggable="false" // Desabilita drag nativo do navegador
                     />
                   )}
-
-                  {/* setas */}
-                  {items.length > 1 && (
-                    <>
-                      <button
-                        type="button"
-                        onClick={handlePrev}
-                        aria-label="Imagem anterior"
-                        className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-2 text-white hover:bg-black/80 focus:outline-none focus:ring-2 focus:ring-white/70"
-                      >
-                        ‹
-                      </button>
-                      <button
-                        type="button"
-                        onClick={handleNext}
-                        aria-label="Próxima imagem"
-                        className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-2 text-white hover:bg-black/80 focus:outline-none focus:ring-2 focus:ring-white/70"
-                      >
-                        ›
-                      </button>
-
-                      {/* indicador de posição */}
-                      <div className="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full bg-black/60 px-3 py-1 text-xs font-medium text-zinc-100">
-                        {index + 1} / {items.length}
-                      </div>
-                    </>
-                  )}
-                </>
+                </motion.div>
               )}
-            </div>
+            </AnimatePresence>
 
-            {description && (
-              <div className="border-t border-white/10 px-4 py-3">
-                <p className="text-xs text-zinc-300">{description}</p>
-              </div>
+            {/* Setas de Navegação (Desktop/Fallback) */}
+            {items.length > 1 && (
+              <>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handlePrev();
+                  }}
+                  className="absolute left-2 md:left-8 p-3 rounded-full bg-black/50 hover:bg-white/20 text-white transition-colors z-50 backdrop-blur-sm border border-white/10 hidden md:block"
+                >
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
+                </button>
+
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleNext();
+                  }}
+                  className="absolute right-2 md:right-8 p-3 rounded-full bg-black/50 hover:bg-white/20 text-white transition-colors z-50 backdrop-blur-sm border border-white/10 hidden md:block"
+                >
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </button>
+
+                {/* Indicador de posição */}
+                <div className="absolute bottom-20 md:bottom-8 left-1/2 -translate-x-1/2 px-4 py-2 bg-black/50 rounded-full text-white/90 text-sm backdrop-blur-sm border border-white/10 z-50 pointer-events-none">
+                  {index + 1} / {items.length}
+                </div>
+              </>
             )}
-          </motion.div>
+          </div>
+
+          {/* Footer Descrição */}
+          {description && (
+            <div className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-md p-6 border-t border-white/10 z-50">
+              <div className="max-w-4xl mx-auto">
+                <p className="text-white/90 text-center leading-relaxed">
+                  {description}
+                </p>
+              </div>
+            </div>
+          )}
         </motion.div>
       ) : null}
     </AnimatePresence>
