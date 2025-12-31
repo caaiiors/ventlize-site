@@ -7,7 +7,7 @@ export default function Hero() {
 
   useEffect(() => {
     let start = 0;
-    const end = 7;
+    const end = 8;
     const duration = 1200; // ms
     const stepMs = 16;
     const increment = end / (duration / stepMs);
