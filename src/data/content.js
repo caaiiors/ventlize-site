@@ -12,7 +12,7 @@ export const SERVICES = [
   { title: "Limpeza e higienização completa (HVAC)", desc: "Com desmontagem ou desinstalação, conforme necessidade." },
   { title: "Diagnóstico técnico e correção", desc: "Correção de erros e falhas operacionais." },
   { title: "Troca e fornecimento de componentes", desc: "Placas, sensores, ventoinhas e demais peças." },
-  { title: "Troca e fornecimento de filtros", desc: "Filtros descartáveis com controle de validade." },
+  { title: "Troca e fornecimento", desc: "De filtros descartáveis com controle de validade." },
   { title: "Venda de equipamentos", desc: "Suporte técnico na escolha da melhor solução para o ambiente." },
 ];
 
